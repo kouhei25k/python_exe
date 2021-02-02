@@ -110,8 +110,10 @@ class AlignTap:
             result_image = aligned_image[miny:maxy, minx:maxx]
             cv2.imwrite(f'{new_dir_path}/result{i}.png',result_image)
             result_image_list.append(result_image)
-
-        ps = PhotoShop(result_image_list,max_height,max_width,)
-        ps.psd(new_dir_path)  
-
-        return "多分成功"
+        
+        if is_save_psd:
+            ps = PhotoShop(result_image_list,max_height,max_width,)
+            ps.psd(new_dir_path)  
+            return f'画像とPSDを{new_dir_path}に保存しました。'
+        else:
+            return f'画像を{new_dir_path}に保存しました。'
